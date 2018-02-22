@@ -1,14 +1,14 @@
-# Map it
+Map it
 
-It is a web based application which gives news based on the location marker. If no news available,
-then rss feed is parsed and displayed on the marked location.
+It is a web based application which gives news based on the locations marker. If no news available,
+then rss feed is parsed and displayed on the marked locations.
 
-## Limitations
+Limitations
 
 The suggestions in the search bar is based on Indian states and cities. For any other country you can change the **IN.txt**
 with you choice of country file from http://download.geonames.org/export/dump/
 
-## Pre-Knowledge
+Pre-Knowledge
 allCountries.zip: all countries, for the UK only the outwards codes, the UK total codes are in GB_full.csv.zip
 GB_full.csv.zip the full codes for the UK, ca 1.7 mio rows
 <iso countrycode>: country specific subset also included in allCountries.zip
