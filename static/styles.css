@@ -1,0 +1,73 @@
+/* Map to fill view report */
+html, body, #map, .container-fluid
+{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    /* Disable Scrollbars */
+    overflow: hidden;
+}
+
+/* To center form */
+#form
+{
+    /* position "absolutely" where we place */
+    position: absolute;
+    /* DIstance from top view report */
+    top: 28px;
+    /* Form's widht */
+    width: 100%;
+}
+
+/* to allign the box */
+#form .form-group
+{
+    /* flex the block */
+    display: flex;
+    /* to center the content */
+    justify-content: center;
+
+}
+
+/* search box query */
+#q
+{
+    /* to override typehead.js */
+    background-color: #ffffff !important;
+    /* search box width */
+    width: 300px;
+}
+
+/* Stylize typeahead.js */
+.tt-menu
+{
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 1px;
+    max-height: 150px;
+    overflow-y: auto;
+    width: 300px;
+}
+.tt-suggestion.tt-cursor {
+    background-color: #0097cf;
+    color: #fff;
+    cursor: pointer;
+}
+.tt-suggestion {
+    margin: 0;
+    padding: 6px 12px;
+}
+
+/* styling info window */
+#info
+{
+    /* no margin */
+    margin: 0;
+    /* allow scrollbar if required */
+    overflow: auto;
+}
+#info ul
+{
+    margin-bottom: 0;
+}

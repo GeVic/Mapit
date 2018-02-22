@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <!-- character set -->
+        <meta charset="utf-8"/>
+        <!-- render webpage accoding to the screen size -->
+        <meta content="initial-scale=1, width=device-width" name="viewport"/>
+
+        <!-- for jquery -->
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+        <!-- apps own java script -->
+        <script src = "/static/scripts.js"></script>
+        <!-- googlemaps api -->
+        <script src="https://maps.googleapis.com/maps/api/js?key={{ key | urlencode }}&v=3.exp"></script>
+        <!-- app's self stylesheet -->
+        <link href = "/static/styles.css" rel = "stylesheet">
+        <!-- bootstrap script -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!-- Bootstrap stylesheet  for search box -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+        <!-- typhead.js script from bootstrap -->
+        <script src="https://cdn.rawgit.com/corejavascript/typeahead.js/master/dist/typeahead.jquery.js"></script>
+        <!-- handlebars kind of jinja -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+        <title>Mapped News</title>
+    </head>
+    <body>
+
+        <!-- fill viewpport -->
+        <div class="container-fluid">
+
+            <!-- map canvas -->
+            <div id="map"></div>
+
+            <!-- search form -->
+            <form id="form">
+                <div class="form-group">
+                    <label class="sr-only" for="q">City, State, Postal Code</label>
+                    <input class="form-control" id="q" placeholder="City, State, Postal Code" type="text"/>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
