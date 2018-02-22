@@ -1,5 +1,14 @@
-Readme for GeoNames Postal Code files :
+# Map it
 
+It is a web based application which gives news based on the location marker. If no news available,
+then rss feed is parsed and displayed on the marked location.
+
+## Limitations
+
+The suggestions in the search bar is based on Indian states and cities. For any other country you can change the **IN.txt**
+with you choice of country file from http://download.geonames.org/export/dump/
+
+## Pre-Knowledge
 allCountries.zip: all countries, for the UK only the outwards codes, the UK total codes are in GB_full.csv.zip
 GB_full.csv.zip the full codes for the UK, ca 1.7 mio rows
 <iso countrycode>: country specific subset also included in allCountries.zip
@@ -11,23 +20,6 @@ The Data is provided "as is" without warranty or any representation of accuracy,
 
 This readme describes the GeoNames Postal Code dataset.
 The main GeoNames gazetteer data extract is here: http://download.geonames.org/export/dump/
-
-
-For many countries lat/lng are determined with an algorithm that searches the place names in the main geonames database
-using administrative divisions and numerical vicinity of the postal codes as factors in the disambiguation of place names.
-For postal codes and place name for which no corresponding toponym in the main geonames database could be found an average
-lat/lng of 'neighbouring' postal codes is calculated.
-Please let us know if you find any errors in the data set. Thanks
-
-For Canada we have only the first letters of the full postal codes (for copyright reasons)
-
-For Ireland we have only the first letters of the full postal codes (for copyright reasons)
-
-For Malta we have only the first letters of the full postal codes (for copyright reasons)
-
-The Argentina data file contains 4-digit postal codes which were replaced with a new system in 1999.
-
-For Brazil only major postal codes are available (only the codes ending with -000 and the major code per municipality).
 
 The data format is tab-delimited text in utf8 encoding, with the following fields :
 
