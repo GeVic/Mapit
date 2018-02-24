@@ -1,14 +1,17 @@
 from flask import Flask, jsonify, render_template, request, url_for
-from cs50 import SQL
+from sqlalchemy import create_engine
+from sqlalchemy.orm import scoped_session, sessionmaker 
 import os
 import re
 from helpers import lookup
+import json
 
 # creating flask object
 app = Flask(__name__)
 
-# cs50 library to use sqlite
-db = SQL("sqlite:///mashup.db")
+# configure sql_alchemy
+engine = create_engine(os.getenv('DATABASE_URL'))
+db = scoped_session(sessionmaker(bind=engine))
 
 # to ensure the responses aren't cached (stored)
 @app.after_request
@@ -40,9 +43,11 @@ def articles():
 
     # get 5 articles
     if len(articles) > 5:
-        return jsonify(articles[:5])
+        #return jsonify(articles[:5])
+        return json.dumps([dict(articles[r]) for r in range(5)])
     else:
-        return jsonify(articles)
+        #return jsonify(articles)
+        return json.dumps([dict(r) for r in articles])
 
 
 @app.route("/search")
@@ -53,11 +58,13 @@ def search():
         raise RuntimeError("missing query")
     # % is the SQL's wild card which here help
     q = request.args.get("q") + "%"
-    places = db.execute("SELECT * FROM places WHERE postal_code LIKE :q OR place_name LIKE :q", q=q)
+    places = db.execute("SELECT * FROM places WHERE postal_code LIKE :q OR place_name LIKE :q", {'q': q}).fetchall()
     if len(places) > 10:
-        return jsonify(places[:10])
+        #return jsonify(places[:10])
+        return json.dumps([dict(articles[r]) for r in range(10)])
     else:
-        return jsonify(places)
+        #return jsonify(places)
+        return json.dumps([dict(r) for r in articles])
 
 
 @app.route("/update")
@@ -90,7 +97,7 @@ def update():
                           GROUP BY country_code, place_name, admin_code1
                           ORDER BY RANDOM()
                           LIMIT 10""",
-                          sw_lat=sw_lat, ne_lat=ne_lat, sw_lng=sw_lng, ne_lng=ne_lng)
+                          {'sw_lat': sw_lat, 'ne_lat': ne_lat, 'sw_lng': sw_lng, 'ne_lng': ne_lng}).fetchall()
 
     else:
 
@@ -100,7 +107,8 @@ def update():
                           GROUP BY country_code, place_name, admin_code1
                           ORDER BY RANDOM()
                           LIMIT 10""",
-                          sw_lat=sw_lat, ne_lat=ne_lat, sw_lng=sw_lng, ne_lng=ne_lng)
+                          {'sw_lat': sw_lat, 'ne_lat': ne_lat, 'sw_lng': sw_lng, 'ne_lng': ne_lng}).fetchall()
 
     # Output places as JSON
-    return jsonify(rows)
+    #return jsonify(rows)
+    return json.dumps([dict(r) for r in rows])
