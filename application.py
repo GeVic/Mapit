@@ -13,6 +13,14 @@ app = Flask(__name__)
 engine = create_engine(os.getenv('DATABASE_URL'))
 db = scoped_session(sessionmaker(bind=engine))
 
+# for 
+def alchemyencoder(obj):
+    """JSON encoder function for SQLAlchemy special classes."""
+    if isinstance(obj, datetime.date):
+        return obj.isoformat()
+    elif isinstance(obj, decimal.Decimal):
+        return float(obj)
+
 # to ensure the responses aren't cached (stored)
 @app.after_request
 def after_request(response):
@@ -44,10 +52,10 @@ def articles():
     # get 5 articles
     if len(articles) > 5:
         #return jsonify(articles[:5])
-        return json.dumps([dict(articles[r]) for r in range(5)])
+        return json.dumps([dict(articles[r]) for r in range(5)],default=alchemyencoder)
     else:
         #return jsonify(articles)
-        return json.dumps([dict(r) for r in articles])
+        return json.dumps([dict(r) for r in articles],default=alchemyencoder)
 
 
 @app.route("/search")
@@ -61,10 +69,10 @@ def search():
     places = db.execute("SELECT * FROM places WHERE postal_code LIKE :q OR place_name LIKE :q", {'q': q}).fetchall()
     if len(places) > 10:
         #return jsonify(places[:10])
-        return json.dumps([dict(articles[r]) for r in range(10)])
+        return json.dumps([dict(places[r]) for r in range(10)],default=alchemyencoder)
     else:
         #return jsonify(places)
-        return json.dumps([dict(r) for r in articles])
+        return json.dumps([dict(r) for r in places],default=alchemyencoder)
 
 
 @app.route("/update")
@@ -111,4 +119,4 @@ def update():
 
     # Output places as JSON
     #return jsonify(rows)
-    return json.dumps([dict(r) for r in rows])
+    return json.dumps([dict(r) for r in rows],default=alchemyencoder)
